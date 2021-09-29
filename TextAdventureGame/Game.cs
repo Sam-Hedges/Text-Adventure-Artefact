@@ -1,39 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using static System.Console;
+using System.Runtime.InteropServices;
 
 namespace TextAdventureGame
 {
-    class Game
+    class Game : WriteLineCentered
     {
+
+        /********************************************************************
+         *  Title: Maximizing console window - C#
+         *  Author: Châu .N
+         *  Authored: 2 Jan. 2016
+         *  Online: Stack Overflow
+         *  Link: https://stackoverflow.com/questions/22053112/maximizing-console-window-c-sharp/22053200
+         *  Accessed: 29 Sep. 2021
+         ********************************************************************/
+
+        #region Maximize Variables
+
+        [DllImport("kernel32.dll", ExactSpelling = true)]                     
+        private static extern IntPtr GetConsoleWindow();
+        private static IntPtr ThisConsole = GetConsoleWindow();
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        private const int HIDE = 0;
+        private const int MAXIMIZE = 3;
+        private const int MINIMIZE = 6;
+        private const int RESTORE = 9;
+
+        #endregion
+
         public string[] directories;
 
         public void Start()
         {
+            SetWindowSize(LargestWindowWidth, LargestWindowHeight); 
+            ShowWindow(ThisConsole, MAXIMIZE);
+
             Title = "Text Adventure - The Game";
-            SetWindowSize(LargestWindowWidth, LargestWindowHeight);
+            //SetWindowSize(LargestWindowWidth, LargestWindowHeight);
             RunMainMenu();
         }
 
         private void RunMainMenu()
         {
             string prompt = @"
-
-    ███        ▄████████ ▀████    ▐████▀     ███             ▄████████ ████████▄   ▄█    █▄     ▄████████ ███▄▄▄▄       ███     ███    █▄     ▄████████    ▄████████ 
-▀█████████▄   ███    ███   ███▌   ████▀  ▀█████████▄        ███    ███ ███   ▀███ ███    ███   ███    ███ ███▀▀▀██▄ ▀█████████▄ ███    ███   ███    ███   ███    ███ 
-   ▀███▀▀██   ███    █▀     ███  ▐███       ▀███▀▀██        ███    ███ ███    ███ ███    ███   ███    █▀  ███   ███    ▀███▀▀██ ███    ███   ███    ███   ███    █▀  
-    ███   ▀  ▄███▄▄▄        ▀███▄███▀        ███   ▀        ███    ███ ███    ███ ███    ███  ▄███▄▄▄     ███   ███     ███   ▀ ███    ███  ▄███▄▄▄▄██▀  ▄███▄▄▄     
-    ███     ▀▀███▀▀▀        ████▀██▄         ███          ▀███████████ ███    ███ ███    ███ ▀▀███▀▀▀     ███   ███     ███     ███    ███ ▀▀███▀▀▀▀▀   ▀▀███▀▀▀     
-    ███       ███    █▄    ▐███  ▀███        ███            ███    ███ ███    ███ ███    ███   ███    █▄  ███   ███     ███     ███    ███ ▀███████████   ███    █▄  
-    ███       ███    ███  ▄███     ███▄      ███            ███    ███ ███   ▄███ ███    ███   ███    ███ ███   ███     ███     ███    ███   ███    ███   ███    ███ 
-   ▄████▀     ██████████ ████       ███▄    ▄████▀          ███    █▀  ████████▀   ▀██████▀    ██████████  ▀█   █▀     ▄████▀   ████████▀    ███    ███   ██████████ 
-                                                                                                                                             ███    ███              
+                                                                                                                                                                              !    
+    ███        ▄████████ ▀████    ▐████▀     ███             ▄████████ ████████▄   ▄█    █▄     ▄████████ ███▄▄▄▄       ███     ███    █▄     ▄████████    ▄████████         .-.   
+▀█████████▄   ███    ███   ███▌   ████▀  ▀█████████▄        ███    ███ ███   ▀███ ███    ███   ███    ███ ███▀▀▀██▄ ▀█████████▄ ███    ███   ███    ███   ███    ███       __|=|__ 
+   ▀███▀▀██   ███    █▀     ███  ▐███       ▀███▀▀██        ███    ███ ███    ███ ███    ███   ███    █▀  ███   ███    ▀███▀▀██ ███    ███   ███    ███   ███    █▀       (_/`-`\_)
+    ███   ▀  ▄███▄▄▄        ▀███▄███▀        ███   ▀        ███    ███ ███    ███ ███    ███  ▄███▄▄▄     ███   ███     ███   ▀ ███    ███  ▄███▄▄▄▄██▀  ▄███▄▄▄          //\___/\\
+    ███     ▀▀███▀▀▀        ████▀██▄         ███          ▀███████████ ███    ███ ███    ███ ▀▀███▀▀▀     ███   ███     ███     ███    ███ ▀▀███▀▀▀▀▀   ▀▀███▀▀▀          <>/   \<>
+    ███       ███    █▄    ▐███  ▀███        ███            ███    ███ ███    ███ ███    ███   ███    █▄  ███   ███     ███     ███    ███ ▀███████████   ███    █▄        \|_._|/ 
+    ███       ███    ███  ▄███     ███▄      ███            ███    ███ ███   ▄███ ███    ███   ███    ███ ███   ███     ███     ███    ███   ███    ███   ███    ███        <_I_>  
+   ▄████▀     ██████████ ████       ███▄    ▄████▀          ███    █▀  ████████▀   ▀██████▀    ██████████  ▀█   █▀     ▄████▀   ████████▀    ███    ███   ██████████         |||   
+                                                                                                                                             ███    ███                     /_|_\  
 
 Use the Arrow keys & Enter key to navigate the menu
+
 ";
             string[] options = { "Play", "Settings", "Exit" };
             Menu mainMenu = new Menu(prompt, options);
@@ -59,7 +83,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void ExitGame()
         {
             Clear();
-            WriteLine("\n   Press any key to exit...");
+            this.WriteLineCentered("\n   Press any key to exit...");
             ReadKey(true);
             Environment.Exit(0);
         }
@@ -67,7 +91,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void DisplayAboutInfo()
         {
             Clear();
-            WriteLine("About the game\nPress enter to return to the Main Menu");
+            this.WriteLineCentered("About the game\nPress enter to return to the Main Menu");
             ReadKey(true);
             RunMainMenu();
         }

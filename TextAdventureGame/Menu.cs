@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using static System.Console;
-using static System.String;
 
 namespace TextAdventureGame
 {
-    class Menu
+    class Menu : WriteLineCentered
     {
         private int SelectedIndex;
         private string[] Options;
@@ -23,7 +19,7 @@ namespace TextAdventureGame
 
         private void DisplayOptions()
         {
-            WriteLine(Prompt);
+            this.WriteLineCentered(Prompt);
             //string dots = "...";
             //for (int i = 0; i < Prompt.Length; i++)
             //{
@@ -52,7 +48,7 @@ namespace TextAdventureGame
                     //BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLineCentered($"{prefix[0]} << {currentOption} >> {prefix[1]}");
+                this.WriteLineCentered($"{prefix[0]} << {currentOption} >> {prefix[1]}");
             }
             ResetColor();
         }
@@ -61,7 +57,6 @@ namespace TextAdventureGame
             ConsoleKey keyPressed;
             do
             {
-
                 Clear();
                 DisplayOptions();
 
@@ -89,11 +84,6 @@ namespace TextAdventureGame
             } while (keyPressed != ConsoleKey.Enter);
 
             return SelectedIndex;
-        }
-
-        void WriteLineCentered(string textToEnter)
-        {
-            WriteLine(Format("{0," + ((WindowWidth / 2) + (textToEnter.Length / 2)) + "}", textToEnter));
         }
     }
 }
