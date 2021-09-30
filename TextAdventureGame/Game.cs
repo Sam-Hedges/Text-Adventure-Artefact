@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using static System.Console;
 using System.Runtime.InteropServices;
 
@@ -23,10 +24,7 @@ namespace TextAdventureGame
         private static IntPtr ThisConsole = GetConsoleWindow();
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-        private const int HIDE = 0;
         private const int MAXIMIZE = 3;
-        private const int MINIMIZE = 6;
-        private const int RESTORE = 9;
 
         #endregion
 
@@ -83,7 +81,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void ExitGame()
         {
             Clear();
-            this.WriteLineCentered("\n   Press any key to exit...");
+            this.WriteLineCentered("\nPress any key to exit...", true);
             ReadKey(true);
             Environment.Exit(0);
         }
@@ -91,7 +89,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void DisplayAboutInfo()
         {
             Clear();
-            this.WriteLineCentered("About the game\nPress enter to return to the Main Menu");
+            this.WriteLineCentered("\nAbout the game\nPress enter to return to the Main Menu", true);
             ReadKey(true);
             RunMainMenu();
         }
@@ -101,6 +99,9 @@ Use the Arrow keys & Enter key to navigate the menu
             string[] searchFields = new string[] { "Story.txt", "Options.txt", "Fights.txt" };
             Dir getDirs = new Dir();
             directories = getDirs.Start(searchFields);
+
+            Clear();
+            this.WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
 
             ReadLine();
         }

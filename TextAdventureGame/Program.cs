@@ -10,12 +10,5 @@ namespace TextAdventureGame
             Game newGame = new Game();
             newGame.Start();
         }
-
-        static void WriteRead(String a)
-        {
-            WriteLine(a);
-            ReadLine();
-            Clear();
-        }
     }
 }

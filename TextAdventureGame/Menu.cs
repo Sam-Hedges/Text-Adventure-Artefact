@@ -20,13 +20,6 @@ namespace TextAdventureGame
         private void DisplayOptions()
         {
             this.WriteLineCentered(Prompt);
-            //string dots = "...";
-            //for (int i = 0; i < Prompt.Length; i++)
-            //{
-            //    Write(Prompt[i]);
-            //    System.Threading.
-            //        Thread.Sleep(1);
-            //}
 
             for (int i = 0; i < Options.Length; i++)
             {

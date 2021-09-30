@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using static System.Console;
 
 namespace TextAdventureGame
@@ -10,7 +11,7 @@ namespace TextAdventureGame
 
     static class ClassExtensions
     {
-        public static void WriteLineCentered(this WriteLineCentered obj, string text)
+        public static void WriteLineCentered(this WriteLineCentered obj, string text, bool printAnim = false)
         {
             using (StringReader reader = new StringReader(text))
             {
@@ -21,7 +22,18 @@ namespace TextAdventureGame
                     if (line != null)
                     {
                         SetCursorPosition((WindowWidth - line.Length) / 2, CursorTop);
-                        WriteLine(line);
+                        if (printAnim)
+                        {
+                            for (int i = 0; i < line.Length; i++)
+                            {
+                                Write(line[i]);
+                                Thread.Sleep(1);
+                            }
+                            WriteLine();
+                        } else
+                        {
+                            WriteLine(line);
+                        }
                     }
                 } while (line != null);
             }
