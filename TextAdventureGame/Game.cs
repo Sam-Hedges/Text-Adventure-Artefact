@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace TextAdventureGame
 {
-    class Game : WriteLineCentered
+    class Game : WriteLineCentered, RandNumbBetwRange
     {
 
         /********************************************************************
@@ -102,8 +102,10 @@ Use the Arrow keys & Enter key to navigate the menu
 
             Clear();
             this.WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
+            this.WriteLineCentered($"\n{this.RandNumbBetwRange(-10, 10, typeof(float))}", true);
 
             ReadLine();
+            RunMainMenu();
         }
     }
 }

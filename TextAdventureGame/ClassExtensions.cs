@@ -9,7 +9,11 @@ namespace TextAdventureGame
     {
     }
 
-    static class ClassExtensions
+    interface RandNumbBetwRange
+    {
+    }
+
+static class ClassExtensions
     {
         public static void WriteLineCentered(this WriteLineCentered obj, string text, bool printAnim = false)
         {
@@ -37,6 +41,25 @@ namespace TextAdventureGame
                     }
                 } while (line != null);
             }
+        }
+
+        public static float RandNumbBetwRange(this RandNumbBetwRange obj, float lowBound, float topBound, Type t)
+        {
+            Random r = new Random();
+            if (t == typeof(int))
+            {
+                int rInt = r.Next(Convert.ToInt32(lowBound), Convert.ToInt32(topBound));
+                return rInt;
+            }
+            else if (t == typeof(float))
+            {
+                float rFloat = Convert.ToSingle(r.NextDouble() * Math.Abs(topBound - lowBound)) + (0f - Math.Abs(lowBound));
+                return rFloat;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid Type");
+            }          
         }
     }
 }
