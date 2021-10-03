@@ -6,62 +6,58 @@ namespace TextAdventureGame
 
     }
 
-    public struct Inventory
+    public abstract class ObtainableItem
     {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int MaximumStackableQuantity { get; set; }
 
-    }
-
-    public struct Item
-    {
-        public Item(string name, int quantity, ItemType type)
+        protected ObtainableItem()
         {
-            Name = name;
-            Quantity = quantity;
-            ItemType = type;
+            MaximumStackableQuantity = 1;
         }
-
-        public string Name;
-        public int Quantity;
-        public ItemType ItemType;
     }
 
-    public struct ItemType
+    public class Weapon : ObtainableItem
     {
-        public ItemType(Weapon weapon)
+        public Weapon()
         {
-            Weapon = weapon;
+           
         }
-
-        public Weapon Weapon;
+        
+        public float Damage;
+        public float Durability;
     }
 
-    public struct Weapon
+    public class Armour : ObtainableItem
     {
-        public Weapon(bool Weapon = false)
+        public Armour()
         {
-            weapon = Weapon;
+
         }
-
-        public bool weapon;
     }
 
-    public struct Armour
+    public class  Key : ObtainableItem
     {
+        public Key()
+        {
 
+        }
     }
 
-    public struct  Key
+    public class Powerup : ObtainableItem
     {
-
+        public Powerup()
+        {
+            MaximumStackableQuantity = 10;
+        }
     }
 
-    public struct Powerup
+    public class Crafting : ObtainableItem
     {
-
-    }
-
-    public struct Story
-    {
-
+        public Crafting()
+        {
+            MaximumStackableQuantity = 20;
+        }
     }
 }
