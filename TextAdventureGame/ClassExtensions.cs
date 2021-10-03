@@ -6,7 +6,7 @@ using static System.Console;
 namespace TextAdventureGame
 {
     interface WriteLineCentered
-    {
+    {      
     }
 
     interface RandNumbBetwRange

@@ -104,6 +104,8 @@ Use the Arrow keys & Enter key to navigate the menu
             this.WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
             this.WriteLineCentered($"\n{this.RandNumbBetwRange(-10, 10, typeof(float))}", true);
 
+            Item apple = new Item("Apple", 1, new ItemType(new Weapon(true)));
+
             ReadLine();
             RunMainMenu();
         }
