@@ -113,7 +113,7 @@ Use the Arrow keys & Enter key to navigate the menu
 
             inventory.AddItem(sword, 1);
 
-            this.WriteLineCentered($"\n{inventory.InventoryRecords[0].}", true);
+            this.WriteLineCentered($"\n{(Weapon)(inventory.InventoryRecords[0].InventoryItem)}", true);
 
             ReadLine();
             RunMainMenu();

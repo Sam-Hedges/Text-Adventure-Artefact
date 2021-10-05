@@ -25,7 +25,7 @@ namespace TextAdventureGame
            
         }
         
-        public float Damage;
+        public float Damage; 
         public float Durability;
     }
 
