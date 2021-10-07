@@ -1,37 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Utils;
+using Items;
 
-namespace TextAdventureGame
+namespace System
 {
     public class InventorySystem
     {
-        private const int MAXIMUM_INV_SLOTS = 15;
 
-        public readonly List<InventoryRecord> InventoryRecords = new List<InventoryRecord>();
+        public const int MAX_INV_SLOTS = 15;
+
+        public readonly List<Item> record = new List<Item>();
             
-        public void AddItem(ObtainableItem item, int quantityToAdd)
+        public void AddItem(Item item, int quantityToAdd)
         {
+
             while (quantityToAdd > 0)
             {
-                if (InventoryRecords.Exists(x => (x.InventoryItem.ID == item.ID) && (x.Quantity < item.MaximumStackableQuantity)))
-                {
-                    InventoryRecord inventoryRecord =
-                    InventoryRecords.First(x => (x.InventoryItem.ID == item.ID) && (x.Quantity < item.MaximumStackableQuantity));
 
-                    int maxQuantityYouCanAddToThisStack = (item.MaximumStackableQuantity - inventoryRecord.Quantity);
+                if (record.Exists(x => (x.ID == item.ID) && (x.quantity < item.maximumStackableQuantity)))
+                {
+                    Item invRecord =
+                    record.First(x => (x.ID == item.ID) && (x.quantity < item.maximumStackableQuantity));
+
+                    int maxQuantityYouCanAddToThisStack = (item.maximumStackableQuantity - invRecord.quantity);
 
                     int quantityToAddToStack = Math.Min(quantityToAdd, maxQuantityYouCanAddToThisStack);
                     
-                    inventoryRecord.AddToQuantity(quantityToAddToStack);
+                    invRecord.AddToQuantity(quantityToAddToStack);
 
                     quantityToAdd -= quantityToAddToStack;
                 }
                 else
                 {
-                    if (InventoryRecords.Count < MAXIMUM_INV_SLOTS)
+
+                    if (record.Count < MAX_INV_SLOTS)
                     {
-                        InventoryRecords.Add(new InventoryRecord(item, 0));
+                        Item tempItem = item;
+                        tempItem.quantity = 0;
+                        record.Add(item);
                     }
                     else
                     {
@@ -42,27 +50,20 @@ namespace TextAdventureGame
                         //
                         //
                         //***************************************
+                        WriteLineCentered($"\n{record.Count} < {MAX_INV_SLOTS}");
+                        for (int i = 0; i < record.Count; i++)
+                        {
+                            WriteLineCentered($"\n{record[i].name}");
+                        }                      
+                        Console.ReadLine();
                         throw new Exception("There is no more space in the inventory");
                     }
+
                 }
+
             }
+
         }
 
-        public class InventoryRecord
-        {
-            public ObtainableItem InventoryItem { get; private set; }
-            public int Quantity { get; private set; }
-
-            public InventoryRecord(ObtainableItem item, int quantity)
-            {
-                InventoryItem = item;
-                Quantity = quantity;
-            }
-
-            public void AddToQuantity(int amountToAdd)
-            {
-                Quantity += amountToAdd;
-            }
-        }
     }
 }

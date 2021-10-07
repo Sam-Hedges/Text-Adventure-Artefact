@@ -2,10 +2,12 @@
 using System.IO;
 using static System.Console;
 using System.Runtime.InteropServices;
+using static System.Utils;
+using Items;
 
 namespace TextAdventureGame
 {
-    class Game : WriteLineCentered, RandNumbBetwRange
+    class Game
     {
 
         /********************************************************************
@@ -21,7 +23,7 @@ namespace TextAdventureGame
 
         [DllImport("kernel32.dll", ExactSpelling = true)]                     
         private static extern IntPtr GetConsoleWindow();
-        private static IntPtr ThisConsole = GetConsoleWindow();
+        private static IntPtr UtilsConsole = GetConsoleWindow();
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         private const int MAXIMIZE = 3;
@@ -33,7 +35,7 @@ namespace TextAdventureGame
         public void Start()
         {
             SetWindowSize(LargestWindowWidth, LargestWindowHeight); 
-            ShowWindow(ThisConsole, MAXIMIZE);
+            ShowWindow(UtilsConsole, MAXIMIZE);
 
             Title = "Text Adventure - The Game";
             //SetWindowSize(LargestWindowWidth, LargestWindowHeight);
@@ -81,7 +83,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void ExitGame()
         {
             Clear();
-            this.WriteLineCentered("\nPress any key to exit...", true);
+            WriteLineCentered("\nPress any key to exit...", true);
             ReadKey(true);
             Environment.Exit(0);
         }
@@ -89,7 +91,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void DisplayAboutInfo()
         {
             Clear();
-            this.WriteLineCentered("\nAbout the game\nPress enter to return to the Main Menu", true);
+            WriteLineCentered("\nAbout the game\nPress enter to return to the Main Menu", true);
             ReadKey(true);
             RunMainMenu();
         }
@@ -101,19 +103,29 @@ Use the Arrow keys & Enter key to navigate the menu
             directories = getDirs.Start(searchFields);
 
             Clear();
-            this.WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
-            this.WriteLineCentered($"\n{this.RandNumbBetwRange(-10, 10, typeof(float))}", true);
+            WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
+            WriteLineCentered($"\n{RandNumbBetwRange(-10, 10, typeof(float))}", true);
 
             InventorySystem inventory = new InventorySystem();
             Weapon sword = new Weapon();
-            sword.Name = "Katana";
+            sword.name = "Katana";
+            sword.itemType = ItemType.Weapon;
             sword.ID = 0;
-            sword.Damage = 20f;
-            sword.Durability = 100f;
+            sword.damage = 20f;
+            sword.durability = 100f;
 
             inventory.AddItem(sword, 1);
 
-            this.WriteLineCentered($"\n{(Weapon)(inventory.InventoryRecords[0].InventoryItem)}", true);
+            Weapon temp = (Weapon)inventory.record[0];
+            if (temp.itemType == ItemType.Weapon)
+            {
+                WriteLineCentered($"\nName: {temp.name}", true);
+                WriteLineCentered($"\nType: {temp.itemType}", true);
+                WriteLineCentered($"\nID: {temp.ID}", true);
+                WriteLineCentered($"\nQuantity: {temp.quantity}", true);
+                WriteLineCentered($"\nDamage: {temp.damage}", true);
+                WriteLineCentered($"\nDurability: {temp.durability}", true);
+            }
 
             ReadLine();
             RunMainMenu();

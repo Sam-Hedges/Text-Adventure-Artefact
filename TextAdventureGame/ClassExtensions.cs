@@ -3,19 +3,11 @@ using System.IO;
 using System.Threading;
 using static System.Console;
 
-namespace TextAdventureGame
+namespace System
 {
-    interface WriteLineCentered
-    {      
-    }
-
-    interface RandNumbBetwRange
+    static class Utils
     {
-    }
-
-static class ClassExtensions
-    {
-        public static void WriteLineCentered(this WriteLineCentered obj, string text, bool printAnim = false)
+        public static void WriteLineCentered(string text, bool printAnim = false)
         {
             using (StringReader reader = new StringReader(text))
             {
@@ -43,7 +35,7 @@ static class ClassExtensions
             }
         }
 
-        public static float RandNumbBetwRange(this RandNumbBetwRange obj, float lowBound, float topBound, Type t)
+        public static float RandNumbBetwRange(float lowBound, float topBound, Type t)
         {
             Random r = new Random();
             if (t == typeof(int))

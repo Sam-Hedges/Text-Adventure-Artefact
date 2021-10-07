@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using static System.Console;
+using static System.Utils;
 
 namespace TextAdventureGame
 {
-    class Menu : WriteLineCentered
+    class Menu
     {
         private int SelectedIndex;
         private string[] Options;
@@ -19,7 +20,7 @@ namespace TextAdventureGame
 
         private void DisplayOptions()
         {
-            this.WriteLineCentered(Prompt);
+            WriteLineCentered(Prompt);
 
             for (int i = 0; i < Options.Length; i++)
             {
@@ -41,7 +42,7 @@ namespace TextAdventureGame
                     //BackgroundColor = ConsoleColor.Black;
                 }
 
-                this.WriteLineCentered($"{prefix[0]} << {currentOption} >> {prefix[1]}");
+                WriteLineCentered($"{prefix[0]} << {currentOption} >> {prefix[1]}");
             }
             ResetColor();
         }
