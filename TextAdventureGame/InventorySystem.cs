@@ -50,10 +50,10 @@ namespace System
                         //
                         //
                         //***************************************
-                        WriteLineCentered($"\n{record.Count} < {MAX_INV_SLOTS}");
+                        WriteLineAdvanced($"\n{record.Count} < {MAX_INV_SLOTS}");
                         for (int i = 0; i < record.Count; i++)
                         {
-                            WriteLineCentered($"\n{record[i].name}");
+                            WriteLineAdvanced($"\n{record[i].name}");
                         }                      
                         Console.ReadLine();
                         throw new Exception("There is no more space in the inventory");
@@ -65,5 +65,36 @@ namespace System
 
         }
 
+        public dynamic ReturnItem(int index)
+        {
+            ItemType currentItemType = record[index].itemType;
+
+            switch (currentItemType)
+            {
+                case ItemType.Weapon:
+                    Weapon tempWeapon = (Weapon)record[index];
+                    return tempWeapon;
+
+                case ItemType.Armour:
+                    Armour tempArmour = (Armour)record[index];
+                    return tempArmour;
+
+                case ItemType.Key:
+                    Key tempKey = (Key)record[index];
+                    return tempKey;
+
+                case ItemType.Powerup:
+                    Powerup tempPowerup = (Powerup)record[index];
+                    return tempPowerup;
+
+                case ItemType.Crafting:
+                    Crafting tempCrafting = (Crafting)record[index];
+                    return tempCrafting;
+
+                default:
+                    throw new Exception("Invalid Item Type");
+            }
+
+        }
     }
 }

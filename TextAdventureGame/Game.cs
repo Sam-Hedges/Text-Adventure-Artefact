@@ -83,7 +83,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void ExitGame()
         {
             Clear();
-            WriteLineCentered("\nPress any key to exit...", true);
+            WriteLineAdvanced("\nPress any key to exit...", true);
             ReadKey(true);
             Environment.Exit(0);
         }
@@ -91,7 +91,7 @@ Use the Arrow keys & Enter key to navigate the menu
         private void DisplayAboutInfo()
         {
             Clear();
-            WriteLineCentered("\nAbout the game\nPress enter to return to the Main Menu", true);
+            WriteLineAdvanced("\nAbout the game\nPress enter to return to the Main Menu", true);
             ReadKey(true);
             RunMainMenu();
         }
@@ -103,8 +103,8 @@ Use the Arrow keys & Enter key to navigate the menu
             directories = getDirs.Start(searchFields);
 
             Clear();
-            WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
-            WriteLineCentered($"\n{RandNumbBetwRange(-10, 10, typeof(float))}", true);
+            //WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
+            //WriteLineCentered($"\n{RandNumbBetwRange(-10, 10, typeof(float))}", true);
 
             InventorySystem inventory = new InventorySystem();
             Weapon sword = new Weapon();
@@ -116,16 +116,17 @@ Use the Arrow keys & Enter key to navigate the menu
 
             inventory.AddItem(sword, 1);
 
-            Weapon temp = (Weapon)inventory.record[0];
-            if (temp.itemType == ItemType.Weapon)
-            {
-                WriteLineCentered($"\nName: {temp.name}", true);
-                WriteLineCentered($"\nType: {temp.itemType}", true);
-                WriteLineCentered($"\nID: {temp.ID}", true);
-                WriteLineCentered($"\nQuantity: {temp.quantity}", true);
-                WriteLineCentered($"\nDamage: {temp.damage}", true);
-                WriteLineCentered($"\nDurability: {temp.durability}", true);
-            }
+
+
+            Armour temp = inventory.ReturnItem(0);
+            
+            WriteLineAdvanced($"\nName: {temp.name}");
+            WriteLineAdvanced($"\nType: {temp.itemType}");
+            WriteLineAdvanced($"\nID: {temp.ID}");
+            WriteLineAdvanced($"\nQuantity: {temp.quantity}");
+            //WriteLineAdvanced($"\nDamage: {temp.damage}");
+            //WriteLineAdvanced($"\nDurability: {temp.durability}");
+            
 
             ReadLine();
             RunMainMenu();

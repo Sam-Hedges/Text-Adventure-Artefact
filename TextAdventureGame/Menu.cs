@@ -20,7 +20,7 @@ namespace TextAdventureGame
 
         private void DisplayOptions()
         {
-            WriteLineCentered(Prompt);
+            WriteLineAdvanced(Prompt, true, false);
 
             for (int i = 0; i < Options.Length; i++)
             {
@@ -42,7 +42,7 @@ namespace TextAdventureGame
                     //BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLineCentered($"{prefix[0]} << {currentOption} >> {prefix[1]}");
+                WriteLineAdvanced($"{prefix[0]} << {currentOption} >> {prefix[1]}", true, false);
             }
             ResetColor();
         }
