@@ -118,14 +118,14 @@ Use the Arrow keys & Enter key to navigate the menu
 
 
 
-            Armour temp = inventory.ReturnItem(0);
+            Weapon temp = inventory.ReturnItem(0);
             
             WriteLineAdvanced($"\nName: {temp.name}");
             WriteLineAdvanced($"\nType: {temp.itemType}");
             WriteLineAdvanced($"\nID: {temp.ID}");
             WriteLineAdvanced($"\nQuantity: {temp.quantity}");
-            //WriteLineAdvanced($"\nDamage: {temp.damage}");
-            //WriteLineAdvanced($"\nDurability: {temp.durability}");
+            WriteLineAdvanced($"\nDamage: {temp.damage}");
+            WriteLineAdvanced($"\nDurability: {temp.durability}");
             
 
             ReadLine();
