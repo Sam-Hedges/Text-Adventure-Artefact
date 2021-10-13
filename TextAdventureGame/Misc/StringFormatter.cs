@@ -6,14 +6,14 @@ using static Artefact.Utilities;
 
 namespace Artefact
 {
-    class StringFormatter
+    public static class StringFormatter
     {
 
-        const string REGEX_PATTERN = @"(\[[^\/\W][^\]]*\])";
+        const string REGEX_PATTERN = @"((\[[^\W*]*\])([^\[]*[\]]*)(\[[^\W*]*\])?)";
 
-        public void test(string filePath)
+        public static void test(string filePath)
         {
-            string[] pieces = Regex.Split("[green]the fox was epic[e] gay man freedom sex with the animals fox furries die [red]asdfasdfasd[e]", @"(\[[^\/\W][^\]]*\])");
+            string[] pieces = Regex.Split(File.ReadAllText(filePath), REGEX_PATTERN);
             foreach (string piece in pieces)
             {
                 WriteLineAdvanced(piece);

@@ -1,5 +1,4 @@
-﻿
-namespace Artefact
+﻿namespace Artefact
 {
     class Program
     {

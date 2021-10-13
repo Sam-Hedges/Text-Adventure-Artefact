@@ -3,6 +3,7 @@ using static System.Console;
 using System.Runtime.InteropServices;
 using static Artefact.Utilities;
 using Items;
+using static Artefact.StringFormatter;
 
 namespace Artefact
 {
@@ -116,14 +117,14 @@ Use the Arrow keys & Enter key to navigate the menu
 
             inventory.AddItem(sword, 1);
 
+            test(directories[0]);
 
-
-            Item temp = inventory.ReturnItem(0);
+            Weapon temp = inventory.ReturnItem(0);
             
-            WriteLineAdvanced($"\nName: {temp.name}");
-            WriteLineAdvanced($"\nType: {temp.itemType}");
-            WriteLineAdvanced($"\nID: {temp.ID}");
-            WriteLineAdvanced($"\nQuantity: {temp.quantity}");
+            //WriteLineAdvanced($"\nName: {temp.name}");
+            //WriteLineAdvanced($"\nType: {temp.itemType}");
+            //WriteLineAdvanced($"\nID: {temp.ID}");
+            //WriteLineAdvanced($"\nQuantity: {temp.quantity}");
             //WriteLineAdvanced($"\nDamage: {temp.damage}");
             //WriteLineAdvanced($"\nDurability: {temp.durability}");
             
