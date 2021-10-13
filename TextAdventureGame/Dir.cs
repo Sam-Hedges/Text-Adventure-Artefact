@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TextAdventureGame
+namespace Artefact
 {
     class Dir
     {

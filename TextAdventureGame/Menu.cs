@@ -3,7 +3,7 @@ using System.IO;
 using static System.Console;
 using static System.Utils;
 
-namespace TextAdventureGame
+namespace Artefact
 {
     class Menu
     {

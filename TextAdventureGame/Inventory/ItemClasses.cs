@@ -1,5 +1,4 @@
-﻿
-namespace Items
+﻿namespace Items.Inventory
 { 
     public enum ItemType
     {

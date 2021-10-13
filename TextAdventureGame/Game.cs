@@ -4,8 +4,9 @@ using static System.Console;
 using System.Runtime.InteropServices;
 using static System.Utils;
 using Items;
+using System.Text.RegularExpressions;
 
-namespace TextAdventureGame
+namespace Artefact
 {
     class Game
     {
@@ -102,7 +103,7 @@ Use the Arrow keys & Enter key to navigate the menu
             Dir getDirs = new Dir();
             directories = getDirs.Start(searchFields);
 
-            Clear();
+            Clear();          
             //WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
             //WriteLineCentered($"\n{RandNumbBetwRange(-10, 10, typeof(float))}", true);
 
@@ -118,14 +119,21 @@ Use the Arrow keys & Enter key to navigate the menu
 
 
 
-            Weapon temp = inventory.ReturnItem(0);
+            Item temp = inventory.ReturnItem(0);
+            if (temp.itemType == ItemType.Weapon)
+            {
+
+            } else if (temp.itemType == ItemType.Armour)
+            {
+
+            }
             
             WriteLineAdvanced($"\nName: {temp.name}");
             WriteLineAdvanced($"\nType: {temp.itemType}");
             WriteLineAdvanced($"\nID: {temp.ID}");
             WriteLineAdvanced($"\nQuantity: {temp.quantity}");
-            WriteLineAdvanced($"\nDamage: {temp.damage}");
-            WriteLineAdvanced($"\nDurability: {temp.durability}");
+            //WriteLineAdvanced($"\nDamage: {temp.damage}");
+            //WriteLineAdvanced($"\nDurability: {temp.durability}");
             
 
             ReadLine();

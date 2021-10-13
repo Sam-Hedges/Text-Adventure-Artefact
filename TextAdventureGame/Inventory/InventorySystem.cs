@@ -4,7 +4,7 @@ using System.Linq;
 using static System.Utils;
 using Items;
 
-namespace System
+namespace System.Inventory
 {
     public class InventorySystem
     {

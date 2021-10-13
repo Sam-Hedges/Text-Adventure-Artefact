@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using static System.Console;
 
-namespace System
+namespace System.Utilities
 {
     static class Utils
     {

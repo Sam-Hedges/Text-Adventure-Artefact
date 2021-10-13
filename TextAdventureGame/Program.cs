@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Console;
 
-namespace TextAdventureGame
+namespace Artefact
 {
     class Program
     {
