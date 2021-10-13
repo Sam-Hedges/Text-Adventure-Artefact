@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Utils;
+using static Artefact.Utilities;
 using Items;
 
-namespace System.Inventory
+namespace Artefact
 {
     public class InventorySystem
     {

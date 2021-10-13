@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 using static System.Console;
-using static System.Utils;
+using static Artefact.Utilities;
 
 namespace Artefact
 {

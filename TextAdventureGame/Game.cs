@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
 using static System.Console;
 using System.Runtime.InteropServices;
-using static System.Utils;
+using static Artefact.Utilities;
 using Items;
-using System.Text.RegularExpressions;
 
 namespace Artefact
 {
@@ -39,7 +37,11 @@ namespace Artefact
             ShowWindow(UtilsConsole, MAXIMIZE);
 
             Title = "Text Adventure - The Game";
-            //SetWindowSize(LargestWindowWidth, LargestWindowHeight);
+
+            string[] searchFields = new string[] { "Story.txt", "Options.txt", "Fights.txt" };
+            Dir getDirs = new Dir();
+            directories = getDirs.Start(searchFields);
+
             RunMainMenu();
         }
 
@@ -98,10 +100,7 @@ Use the Arrow keys & Enter key to navigate the menu
         }
 
         private void PlayGame()
-        {
-            string[] searchFields = new string[] { "Story.txt", "Options.txt", "Fights.txt" };
-            Dir getDirs = new Dir();
-            directories = getDirs.Start(searchFields);
+        {         
 
             Clear();          
             //WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
@@ -120,13 +119,6 @@ Use the Arrow keys & Enter key to navigate the menu
 
 
             Item temp = inventory.ReturnItem(0);
-            if (temp.itemType == ItemType.Weapon)
-            {
-
-            } else if (temp.itemType == ItemType.Armour)
-            {
-
-            }
             
             WriteLineAdvanced($"\nName: {temp.name}");
             WriteLineAdvanced($"\nType: {temp.itemType}");

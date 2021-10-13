@@ -3,9 +3,9 @@ using System.IO;
 using System.Threading;
 using static System.Console;
 
-namespace System.Utilities
+namespace Artefact
 {
-    static class Utils
+    static class Utilities
     {
         public static void WriteLineAdvanced(string text, bool centered = true, bool printAnim = true)
         {

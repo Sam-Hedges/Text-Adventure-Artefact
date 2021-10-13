@@ -1,6 +1,4 @@
-﻿using System;
-using static System.Console;
-
+﻿
 namespace Artefact
 {
     class Program

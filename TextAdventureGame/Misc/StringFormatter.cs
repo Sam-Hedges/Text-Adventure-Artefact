@@ -1,16 +1,17 @@
 ﻿using System;
 using static System.Console;
+using System.IO;
 using System.Text.RegularExpressions;
-using static System.Utils;
+using static Artefact.Utilities;
 
-namespace Artefact.Misc
+namespace Artefact
 {
     class StringFormatter
     {
 
         const string REGEX_PATTERN = @"(\[[^\/\W][^\]]*\])";
 
-        public void test()
+        public void test(string filePath)
         {
             string[] pieces = Regex.Split("[green]the fox was epic[e] gay man freedom sex with the animals fox furries die [red]asdfasdfasd[e]", @"(\[[^\/\W][^\]]*\])");
             foreach (string piece in pieces)
