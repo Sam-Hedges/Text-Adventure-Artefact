@@ -11,11 +11,11 @@
 
     public class Item
     {
-        public int ID { get; set; }
-        public string name { get; set; }
-        public ItemType itemType { get; set; }
-        public int maximumStackableQuantity { get; set; }
-        public int quantity { get; set; }
+        public int ID;
+        public string name;
+        public ItemType itemType;
+        public int maximumStackableQuantity;
+        public int quantity;
         
         protected Item()
         {

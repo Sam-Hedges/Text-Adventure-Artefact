@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Artefact.Utilities;
+using Artefact.Utilities;
 using Items;
 
 namespace Artefact
@@ -10,13 +10,13 @@ namespace Artefact
     {
 
         public const int MAX_INV_SLOTS = 15;
-
+        
         public readonly List<Item> record = new List<Item>();
             
-        public void AddItem(Item item, int quantityToAdd)
+        public void AddItem(Item item, int iQuantityToAdd)
         {
 
-            while (quantityToAdd > 0)
+            while (iQuantityToAdd > 0)
             {
 
                 if (record.Exists(x => (x.ID == item.ID) && (x.quantity < item.maximumStackableQuantity)))
@@ -24,13 +24,13 @@ namespace Artefact
                     Item invRecord =
                     record.First(x => (x.ID == item.ID) && (x.quantity < item.maximumStackableQuantity));
 
-                    int maxQuantityYouCanAddToThisStack = (item.maximumStackableQuantity - invRecord.quantity);
+                    int maxStackQuantity = (item.maximumStackableQuantity - invRecord.quantity);
 
-                    int quantityToAddToStack = Math.Min(quantityToAdd, maxQuantityYouCanAddToThisStack);
+                    int quantityToAdd = Math.Min(iQuantityToAdd, maxStackQuantity);
                     
-                    invRecord.AddToQuantity(quantityToAddToStack);
+                    invRecord.AddToQuantity(quantityToAdd);
 
-                    quantityToAdd -= quantityToAddToStack;
+                    iQuantityToAdd -= quantityToAdd;
                 }
                 else
                 {
@@ -50,10 +50,10 @@ namespace Artefact
                         //
                         //
                         //***************************************
-                        WriteLineAdvanced($"\n{record.Count} < {MAX_INV_SLOTS}");
+                        Utils.WriteLineAdvanced($"\n{record.Count} < {MAX_INV_SLOTS}");
                         for (int i = 0; i < record.Count; i++)
                         {
-                            WriteLineAdvanced($"\n{record[i].name}");
+                            Utils.WriteLineAdvanced($"\n{record[i].name}");
                         }                      
                         Console.ReadLine();
                         throw new Exception("There is no more space in the inventory");
@@ -65,35 +65,11 @@ namespace Artefact
 
         }
 
-        public dynamic ReturnItem(int index)
+        public Item ReturnItem(int index)
         {
             ItemType currentItemType = record[index].itemType;
 
-            switch (currentItemType)
-            {
-                case ItemType.Weapon:
-                    Weapon tempWeapon = (Weapon)record[index];
-                    return tempWeapon;
-
-                case ItemType.Armour:
-                    Armour tempArmour = (Armour)record[index];
-                    return tempArmour;
-
-                case ItemType.Key:
-                    Key tempKey = (Key)record[index];
-                    return tempKey;
-
-                case ItemType.Powerup:
-                    Powerup tempPowerup = (Powerup)record[index];
-                    return tempPowerup;
-
-                case ItemType.Crafting:
-                    Crafting tempCrafting = (Crafting)record[index];
-                    return tempCrafting;
-
-                default:
-                    throw new Exception("Invalid Item Type");
-            }
+            return record[index];
 
         }
     }

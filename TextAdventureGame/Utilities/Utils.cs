@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using static System.Console;
 
-namespace Artefact
+namespace Artefact.Utilities
 {
-    static class Utilities
+    static class Utils
     {
         public static void WriteLineAdvanced(string text, bool centered = true, bool printAnim = true)
         {
@@ -25,7 +24,7 @@ namespace Artefact
 
                         if (centered)
                         {
-                            SetCursorPosition((WindowWidth - line.Length) / 2, CursorTop);
+                            Console.SetCursorPosition((Console.WindowWidth - line.Length) / 2, Console.CursorTop);
                         }
 
                         if (printAnim)
@@ -33,15 +32,15 @@ namespace Artefact
 
                             for (int i = 0; i < line.Length; i++)
                             {
-                                Write(line[i]);
+                                Console.Write(line[i]);
                                 Thread.Sleep(1);
                             }
 
-                            WriteLine();
+                            Console.WriteLine();
 
                         } else
                         {
-                            WriteLine(line);
+                            Console.WriteLine(line);
                         }
 
                     }

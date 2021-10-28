@@ -1,48 +1,14 @@
 ﻿using System;
-using static System.Console;
-using System.Runtime.InteropServices;
-using static Artefact.Utilities;
+using System.IO;
+using Artefact.Utilities;
 using Items;
-using static Artefact.StringFormatter;
 
 namespace Artefact
 {
     class Game
-    {
-
-        /********************************************************************
-         *  Title: Maximizing console window - C#
-         *  Author: Châu .N
-         *  Authored: 2 Jan. 2016
-         *  Online: Stack Overflow
-         *  Link: https://stackoverflow.com/questions/22053112/maximizing-console-window-c-sharp/22053200
-         *  Accessed: 29 Sep. 2021
-         ********************************************************************/
-
-        #region Maximize Variables
-
-        [DllImport("kernel32.dll", ExactSpelling = true)]                     
-        private static extern IntPtr GetConsoleWindow();
-        private static IntPtr UtilsConsole = GetConsoleWindow();
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-        private const int MAXIMIZE = 3;
-
-        #endregion
-
-        public string[] directories;
-
+    { 
         public void Start()
         {
-            SetWindowSize(LargestWindowWidth, LargestWindowHeight); 
-            ShowWindow(UtilsConsole, MAXIMIZE);
-
-            Title = "Text Adventure - The Game";
-
-            string[] searchFields = new string[] { "Story.txt", "Options.txt", "Fights.txt" };
-            Dir getDirs = new Dir();
-            directories = getDirs.Start(searchFields);
-
             RunMainMenu();
         }
 
@@ -86,50 +52,28 @@ Use the Arrow keys & Enter key to navigate the menu
 
         private void ExitGame()
         {
-            Clear();
-            WriteLineAdvanced("\nPress any key to exit...", true);
-            ReadKey(true);
+            Console.Clear();
+            Utils.WriteLineAdvanced("\nPress any key to exit...");
+            Console.ReadKey(true);
             Environment.Exit(0);
         }
 
         private void DisplayAboutInfo()
         {
-            Clear();
-            WriteLineAdvanced("\nAbout the game\nPress enter to return to the Main Menu", true);
-            ReadKey(true);
+            Console.Clear();
+            Utils.WriteLineAdvanced("\nAbout the game\nPress enter to return to the Main Menu");
+            Console.ReadKey(true);
             RunMainMenu();
         }
 
         private void PlayGame()
         {         
 
-            Clear();          
-            //WriteLineCentered($"\n{File.ReadAllText(directories[0])}", true);
-            //WriteLineCentered($"\n{RandNumbBetwRange(-10, 10, typeof(float))}", true);
+            Console.Clear();
+            Utils.WriteLineAdvanced($"\n{File.ReadAllText(Directories.ReturnDir(Scripts.Story))}");
 
-            InventorySystem inventory = new InventorySystem();
-            Weapon sword = new Weapon();
-            sword.name = "Katana";
-            sword.itemType = ItemType.Weapon;
-            sword.ID = 0;
-            sword.damage = 20f;
-            sword.durability = 100f;
 
-            inventory.AddItem(sword, 1);
-
-            test(directories[0]);
-
-            Weapon temp = inventory.ReturnItem(0);
-            
-            //WriteLineAdvanced($"\nName: {temp.name}");
-            //WriteLineAdvanced($"\nType: {temp.itemType}");
-            //WriteLineAdvanced($"\nID: {temp.ID}");
-            //WriteLineAdvanced($"\nQuantity: {temp.quantity}");
-            //WriteLineAdvanced($"\nDamage: {temp.damage}");
-            //WriteLineAdvanced($"\nDurability: {temp.durability}");
-            
-
-            ReadLine();
+            Console.ReadLine();
             RunMainMenu();
         }
     }

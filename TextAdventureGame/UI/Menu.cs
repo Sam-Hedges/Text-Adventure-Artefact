@@ -1,6 +1,5 @@
-﻿using System;
-using static System.Console;
-using static Artefact.Utilities;
+﻿using Artefact.Utilities;
+using System;
 
 namespace Artefact
 {
@@ -19,7 +18,7 @@ namespace Artefact
 
         private void DisplayOptions()
         {
-            WriteLineAdvanced(Prompt, true, false);
+            Utils.WriteLineAdvanced(Prompt, true, false);
 
             for (int i = 0; i < Options.Length; i++)
             {
@@ -30,30 +29,30 @@ namespace Artefact
                 {
                     prefix[0] = "---|>";
                     prefix[1] = "<|---";
-                    ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     //BackgroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     prefix[0] = " ";
                     prefix[1] = " ";
-                    ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.White;
                     //BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLineAdvanced($"{prefix[0]} << {currentOption} >> {prefix[1]}", true, false);
+                Utils.WriteLineAdvanced($"{prefix[0]} << {currentOption} >> {prefix[1]}", true, false);
             }
-            ResetColor();
+            Console.ResetColor();
         }
         public int Run()
         {
             ConsoleKey keyPressed;
             do
             {
-                Clear();
+                Console.Clear();
                 DisplayOptions();
 
-                ConsoleKeyInfo keyInfo = ReadKey(true);
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 keyPressed = keyInfo.Key;
 
                 //Update SelectedIndex based on arrow keys

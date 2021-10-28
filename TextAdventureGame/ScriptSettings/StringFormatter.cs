@@ -2,7 +2,7 @@
 using static System.Console;
 using System.IO;
 using System.Text.RegularExpressions;
-using static Artefact.Utilities;
+using Artefact.Utilities;
 
 namespace Artefact
 {
@@ -16,7 +16,7 @@ namespace Artefact
             string[] pieces = Regex.Split(File.ReadAllText(filePath), REGEX_PATTERN);
             foreach (string piece in pieces)
             {
-                WriteLineAdvanced(piece);
+                Utils.WriteLineAdvanced(piece);
             }
         }
     }
