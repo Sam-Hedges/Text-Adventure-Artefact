@@ -5,4 +5,22 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Scripts\Fights.txt" />
+    <None Remove="Scripts\Options.txt" />
+    <None Remove="Scripts\Story.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Scripts\Fights.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Options.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Story.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

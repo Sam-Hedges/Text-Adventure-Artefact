@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
 using Artefact.Utilities;
-using Items;
+using Artefact.Inventory.ItemClasses;
+using Artefact.ScriptSettings;
 
 namespace Artefact
 {
@@ -70,8 +71,8 @@ Use the Arrow keys & Enter key to navigate the menu
         {         
 
             Console.Clear();
-            Utils.WriteLineAdvanced($"\n{File.ReadAllText(Directories.ReturnDir(Scripts.Story))}");
-
+            StringFormatter.Test(Scripts.Story);
+            
 
             Console.ReadLine();
             RunMainMenu();

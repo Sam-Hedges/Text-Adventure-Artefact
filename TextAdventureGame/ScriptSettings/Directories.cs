@@ -1,77 +1,74 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Linq;
+using System.Collections.Generic;
 
-namespace Artefact
+namespace Artefact.ScriptSettings
 {
-    enum Scripts
+    public enum Scripts
     {
         Story,
         Options,
         Fights
     }
+
+    struct Directory
+    {
+        public Directory(Scripts ID, string filePath)
+        {
+            this.ID = ID;
+            this.filePath = filePath;
+        }
+
+        public Scripts ID;
+        public string filePath;
+    }
+
     static class Directories
     {
+        private static bool start = false;
+        private static readonly List<Directory> scripts = new List<Directory>();
 
-        private const string STORY = "/Script/Story.txt";
-        private const string OPTIONS = "/Script/Options.txt";
-        private const string FIGHTS = "/Script/Fights.txt";
+        private static readonly string[] relativePaths = new string[] { @"Scripts\Story.txt", @"Scripts\Options.txt", @"Scripts\Fights.txt" };
 
         public static string ReturnDir(Scripts script)
         {
-            string currentDirectory = System.IO.Directory.GetCurrentDirectory();
+            if (Enum.GetNames(typeof(Scripts)).Length != relativePaths.Length) { throw new Exception("Not all relative paths or enum members have been added"); }
+
+            if (!start) { InstantiateList(); }
 
             switch (script)
             {
                 case Scripts.Story:
-                    return ProcessDirectory(System.IO.Directory.GetCurrentDirectory(), STORY);
+                    string storyPath = scripts.First(x => (x.ID == Scripts.Story)).filePath;
+                    return storyPath;
                 case Scripts.Options:
-                    return ProcessDirectory(currentDirectory, OPTIONS);
+                    string optionsPath = scripts.First(x => (x.ID == Scripts.Options)).filePath;
+                    return optionsPath;
                 case Scripts.Fights:
-                    return ProcessDirectory(currentDirectory, FIGHTS);
+                    string fightsPath = scripts.First(x => (x.ID == Scripts.Fights)).filePath;
+                    return fightsPath;
                 default:
                     throw new Exception("Not Valid Directory");
             }
         }
 
-        public static string[] Start(string[] searchFields)
+        private static void InstantiateList()
         {
-            string currentDirectory = System.IO.Directory.GetCurrentDirectory();
-
-            string[] directories = new string[searchFields.Length];
-
-            for (int i = 0; i < searchFields.Length; i++)
+            for(int i = 0; i < Enum.GetNames(typeof(Scripts)).Length; i++)
             {
-                //directories[i] = ProcessDirectory(path, searchFields[i]);
+                Directory temp = new Directory((Scripts)i, relativePaths[i]);
+                scripts.Add(temp);
             }
 
-            return directories;
+            start = true;
         }
 
-        private static string ProcessDirectory(string directory, string target)
+        private static string ProcessDirectory(string target)
         {
-            string path = directory;
-            string[] fileEntries;
-            string finalPath = "";
-
-            do
-            {
-
-                fileEntries = System.IO.Directory.GetFiles(System.IO.Directory.GetCurrentDirectory() + STORY);
-
-                if (System.IO.Directory.GetParent(path) != null) { path = System.IO.Directory.GetParent(path).FullName; }
-                else { return "Out of Directory Bounds"; }
-
-                foreach (string fileName in fileEntries)
-                {
-                    if (fileName.Contains(target))
-                    {
-                        finalPath = fileName;
-                        break; //Breaks the foreach loop when the condition is true
-                    }
-                }
-
-            } while (!finalPath.Contains(target));
-
-            return finalPath;
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), target);
+            return path;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Artefact.Utilities;
-using Items;
+using Artefact.Inventory.ItemClasses;
 
 namespace Artefact
 {
