@@ -51,6 +51,50 @@ namespace Artefact.Utilities
 
         }
 
+        public static void CenterCursor(int lineLength)
+        {         
+            Console.SetCursorPosition((Console.WindowWidth - lineLength) / 2, Console.CursorTop);       
+        }
+
+        public static void WriteAdvanced(string text, bool printAnim = true)
+        {
+
+            using (StringReader reader = new StringReader(text))
+            {
+
+                string line = string.Empty;
+
+                do
+                {
+
+                    line = reader.ReadLine();
+
+                    if (line != null)
+                    {
+                     
+                        if (printAnim)
+                        {
+
+                            for (int i = 0; i < line.Length; i++)
+                            {
+                                Console.Write(line[i]);
+                                Thread.Sleep(1);
+                            }
+
+                        }
+                        else
+                        {
+                            Console.Write(line);
+                        }
+
+                    }
+
+                } while (line != null);
+
+            }
+
+        }
+
         public static float RandNumbBetwRange(float lowBound, float topBound, Type t)
         {
             Random r = new Random();
