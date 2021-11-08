@@ -23,9 +23,9 @@ namespace Artefact.ScriptSettings
                     if (line == null) { break; }
 
                     string[] captureGroups = Regex.Split((line), REGEX_PATTERN);
-                    int pureLineLength = PureLineLength(captureGroups);
+                    int lineLengthWithoutSqrB = LineLengthWithoutSquareBrackets(captureGroups);
 
-                    Utils.CenterCursor(pureLineLength);
+                    Utils.CenterCursor(lineLengthWithoutSqrB);
 
                     foreach (string group in captureGroups)
                     {
@@ -35,7 +35,7 @@ namespace Artefact.ScriptSettings
                         if (container)
                         {
                             tempGroup = group.Trim(SQR_BR);
-                            if (!string.IsNullOrEmpty(tempGroup.Trim())) { Console.ForegroundColor = ConsoleColor.Green; }
+                            if (!string.IsNullOrEmpty(tempGroup.Trim())) { Console.ForegroundColor = SetConsoleTextColour(tempGroup); }
                             else { Console.ResetColor(); }
                             continue;
                         }
@@ -49,7 +49,7 @@ namespace Artefact.ScriptSettings
             }
         }
 
-        private static int PureLineLength(string[] input)
+        private static int LineLengthWithoutSquareBrackets(string[] input)
         {
             int lineCount = 0;
 
@@ -63,6 +63,14 @@ namespace Artefact.ScriptSettings
             }
 
             return lineCount;
+        }
+
+        private static ConsoleColor SetConsoleTextColour(string containerColour)
+        {
+            bool viableColour = Enum.TryParse(containerColour, true, out ConsoleColor parsedEnumVal);
+
+            if (viableColour) { return parsedEnumVal; }
+            else { return ConsoleColor.White; }
         }
     }
 }
