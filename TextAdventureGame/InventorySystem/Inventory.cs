@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Artefact.Utilities;
-using Artefact.Inventory.ItemClasses;
+using Artefact.InventorySystem.ItemClasses;
 
-namespace Artefact
+namespace Artefact.InventorySystem
 {
-    public class InventorySystem
+    public class Inventory
     {
 
         public const int MAX_INV_SLOTS = 15;

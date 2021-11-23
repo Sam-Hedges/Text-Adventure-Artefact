@@ -1,4 +1,4 @@
-﻿namespace Artefact.Inventory.ItemClasses
+﻿namespace Artefact.InventorySystem.ItemClasses
 {
     public class Powerup : Item
     {

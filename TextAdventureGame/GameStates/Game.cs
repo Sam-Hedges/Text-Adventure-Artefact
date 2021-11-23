@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Artefact.Utilities;
-using Artefact.Inventory.ItemClasses;
 using Artefact.ScriptSettings;
 
 namespace Artefact
