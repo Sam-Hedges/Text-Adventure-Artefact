@@ -4,7 +4,7 @@
     {
         public Crafting()
         {
-            maximumStackableQuantity = 20;
+            SetMaxStackQuantity(20);
         }
     }
 }

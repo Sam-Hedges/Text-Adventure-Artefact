@@ -4,7 +4,7 @@
     {
         public Powerup()
         {
-            maximumStackableQuantity = 10;
+            SetMaxStackQuantity(10);
         }
     }
 }

@@ -8,5 +8,10 @@ namespace Artefact.Entity
     {
         private float currentHealth;
         private float maxHealth;
+
+        public void ChangeHealth(float newHealth) 
+        {
+        
+        }
     }
 }

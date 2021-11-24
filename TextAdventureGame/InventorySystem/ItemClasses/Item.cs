@@ -11,22 +11,59 @@
 
     public class Item
     {
-        public int ID;
-        public string name;
-        public ItemType itemType;
-        public int maximumStackableQuantity;
-        public int quantity;
-        
-        protected Item()
+        #region Properties
+        public int ID { get; private set; }
+        public string Name { get; private set; }
+        public ItemType ItemType { get; private set; }
+        public int MaxStackQuantity { get; private set; }
+        public int Quantity { get; private set; }
+        public float Value { get; private set; }
+        public string Description { get; private set; }
+
+        #endregion
+
+        #region Constructors
+        public Item(int ID, string name, ItemType itemType, int quantity, float value, int maxStackQuantity, string description)
         {
-            quantity = 1;
-            maximumStackableQuantity = 1;
+            this.ID = ID;
+            Name = name;
+            ItemType = itemType;
+            Value = value;
+            Quantity = quantity;
+            MaxStackQuantity = maxStackQuantity;
+            Description = description;
         }
 
-        public void AddToQuantity(int amountToAdd)
+        public Item(Item item)
         {
-            quantity += amountToAdd;
+            ID = item.ID;
+            Name = item.Name;
+            ItemType = item.ItemType;
+            Value = item.Value;
+            Quantity = item.Quantity;
+            MaxStackQuantity = item.MaxStackQuantity;
+            Description = item.Description;
+        }
+
+        #endregion
+
+        #region Methods
+        public void SetMaxStackQuantity(int value)
+        {
+            MaxStackQuantity = value;
+        }
+
+        public void SetQuantity(int value)
+        {
+            Quantity = value;
+        }
+
+        public void AddToQuantity(int value)
+        {
+            Quantity += value;
 
         }
+
+        #endregion
     }
 }

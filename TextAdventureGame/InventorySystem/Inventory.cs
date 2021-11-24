@@ -19,12 +19,12 @@ namespace Artefact.InventorySystem
             while (iQuantityToAdd > 0)
             {
 
-                if (record.Exists(x => (x.ID == item.ID) && (x.quantity < item.maximumStackableQuantity)))
+                if (record.Exists(x => (x.ID == item.ID) && (x.Quantity < item.MaxStackQuantity)))
                 {
                     Item invRecord =
-                    record.First(x => (x.ID == item.ID) && (x.quantity < item.maximumStackableQuantity));
+                    record.First(x => (x.ID == item.ID) && (x.Quantity < item.MaxStackQuantity));
 
-                    int maxStackQuantity = (item.maximumStackableQuantity - invRecord.quantity);
+                    int maxStackQuantity = (item.MaxStackQuantity - invRecord.Quantity);
 
                     int quantityToAdd = Math.Min(iQuantityToAdd, maxStackQuantity);
                     
@@ -37,8 +37,13 @@ namespace Artefact.InventorySystem
 
                     if (record.Count < MAX_INV_SLOTS)
                     {
-                        Item tempItem = item;
-                        tempItem.quantity = 0;
+                        switch(item.ItemType)
+                        { 
+                            
+                        }
+
+                        Item tempItem = new Item(item);
+                        tempItem.SetQuantity(0);
                         record.Add(item);
                     }
                     else
@@ -53,7 +58,7 @@ namespace Artefact.InventorySystem
                         Utils.WriteLineAdvanced($"\n{record.Count} < {MAX_INV_SLOTS}");
                         for (int i = 0; i < record.Count; i++)
                         {
-                            Utils.WriteLineAdvanced($"\n{record[i].name}");
+                            Utils.WriteLineAdvanced($"\n{record[i].Name}");
                         }                      
                         Console.ReadLine();
                         throw new Exception("There is no more space in the inventory");
@@ -67,7 +72,7 @@ namespace Artefact.InventorySystem
 
         public Item ReturnItem(int index)
         {
-            ItemType currentItemType = record[index].itemType;
+            ItemType currentItemType = record[index].ItemType;
 
             return record[index];
 
