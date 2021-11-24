@@ -37,9 +37,20 @@ namespace Artefact.InventorySystem
 
                     if (record.Count < MAX_INV_SLOTS)
                     {
-                        switch(item.ItemType)
-                        { 
-                            
+                        switch (item.ItemType)
+                        {
+                            case ItemType.Weapon:
+                                break;
+                            case ItemType.Armour:
+                                break;
+                            case ItemType.Key:
+                                break;
+                            case ItemType.Powerup:
+                                break;
+                            case ItemType.Crafting:
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
                         }
 
                         Item tempItem = new Item(item);
