@@ -13,13 +13,11 @@
             Durability = durability;
         }
 
-        public Weapon(Weapon weapon)
-            : base(weapon)
+        public Weapon(Weapon item)
+            : base(item)
         {
-            Damage = weapon.Damage;;
-            Durability = weapon.Durability;
+            Damage = item.Damage;
+            Durability = item.Durability;
         }
-
-
     }
 }

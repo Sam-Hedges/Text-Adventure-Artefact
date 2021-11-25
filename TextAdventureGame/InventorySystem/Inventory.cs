@@ -8,10 +8,9 @@ namespace Artefact.InventorySystem
 {
     public class Inventory
     {
-
-        public const int MAX_INV_SLOTS = 15;
+        private const int MaxInvSlots = 15;
         
-        public readonly List<Item> record = new List<Item>();
+        private readonly List<Item> _record = new List<Item>();
             
         public void AddItem(Item item, int iQuantityToAdd)
         {
@@ -19,10 +18,10 @@ namespace Artefact.InventorySystem
             while (iQuantityToAdd > 0)
             {
 
-                if (record.Exists(x => (x.ID == item.ID) && (x.Quantity < item.MaxStackQuantity)))
+                if (_record.Exists(x => (x.ID == item.ID) && (x.Quantity < item.MaxStackQuantity)))
                 {
                     Item invRecord =
-                    record.First(x => (x.ID == item.ID) && (x.Quantity < item.MaxStackQuantity));
+                    _record.First(x => (x.ID == item.ID) && (x.Quantity < item.MaxStackQuantity));
 
                     int maxStackQuantity = (item.MaxStackQuantity - invRecord.Quantity);
 
@@ -35,27 +34,34 @@ namespace Artefact.InventorySystem
                 else
                 {
 
-                    if (record.Count < MAX_INV_SLOTS)
+                    if (_record.Count < MaxInvSlots)
                     {
+                        Item tempItem;
+                        
                         switch (item.ItemType)
                         {
                             case ItemType.Weapon:
+                                tempItem = new Weapon((Weapon)item);
                                 break;
                             case ItemType.Armour:
+                                tempItem = new Armour((Armour)item);
                                 break;
                             case ItemType.Key:
+                                tempItem = new Key((Key)item);
                                 break;
                             case ItemType.Powerup:
+                                tempItem = new Powerup((Powerup)item);
                                 break;
                             case ItemType.Crafting:
+                                tempItem = new Crafting((Crafting)item);
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
-
-                        Item tempItem = new Item(item);
+                        
                         tempItem.SetQuantity(0);
-                        record.Add(item);
+                        
+                        _record.Add(item);
                     }
                     else
                     {
@@ -66,10 +72,10 @@ namespace Artefact.InventorySystem
                         //
                         //
                         //***************************************
-                        Utils.WriteLineAdvanced($"\n{record.Count} < {MAX_INV_SLOTS}");
-                        for (int i = 0; i < record.Count; i++)
+                        Utils.WriteLineAdvanced($"\n{_record.Count} < {MaxInvSlots}");
+                        foreach (Item items in _record)
                         {
-                            Utils.WriteLineAdvanced($"\n{record[i].Name}");
+                            Utils.WriteLineAdvanced($"\n{items.Name}");
                         }                      
                         Console.ReadLine();
                         throw new Exception("There is no more space in the inventory");
@@ -83,9 +89,9 @@ namespace Artefact.InventorySystem
 
         public Item ReturnItem(int index)
         {
-            ItemType currentItemType = record[index].ItemType;
+            ItemType currentItemType = _record[index].ItemType;
 
-            return record[index];
+            return _record[index];
 
         }
     }

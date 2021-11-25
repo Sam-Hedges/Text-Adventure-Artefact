@@ -12,7 +12,7 @@ namespace Artefact.Utilities
             using (StringReader reader = new StringReader(text))
             {
 
-                string line = string.Empty;
+                string line;
 
                 do
                 {
@@ -62,7 +62,7 @@ namespace Artefact.Utilities
             using (StringReader reader = new StringReader(text))
             {
 
-                string line = string.Empty;
+                string line;
 
                 do
                 {
