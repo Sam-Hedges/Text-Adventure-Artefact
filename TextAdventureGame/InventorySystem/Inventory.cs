@@ -9,6 +9,8 @@ namespace Artefact.InventorySystem
     public class Inventory
     {
         private const int MaxInvSlots = 15;
+
+        public float _balance;
         
         private readonly List<Item> _record = new List<Item>();
             
@@ -87,12 +89,33 @@ namespace Artefact.InventorySystem
 
         }
 
-        public Item ReturnItem(int index)
+        public void RemoveItem(Item item, int quantityToRemove)
         {
-            ItemType currentItemType = _record[index].ItemType;
+            while (quantityToRemove > 0)
+            {
 
-            return _record[index];
+                if (_record.Exists(list => (list.Name == item.Name) && (list.Quantity >= 0)))
+                {
+                    Item currentItem = _record.First(list => (list.Name == item.Name) && (list.Quantity >= 0));
 
+                    int tempQuantityToRemove = Math.Min(quantityToRemove, currentItem.Quantity);
+
+                    currentItem.AddToQuantity(-tempQuantityToRemove);
+
+                    quantityToRemove -= tempQuantityToRemove;
+
+                    if (currentItem.Quantity < 1)
+                    {
+                        _record.Remove(currentItem);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Not valid item to remove or trying to remove too much");
+                    //quantityToRemove = 0;
+                }
+ 
+            }
         }
     }
 }

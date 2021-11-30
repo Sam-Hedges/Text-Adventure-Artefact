@@ -1,9 +1,9 @@
 ﻿using System;
-using System.IO;
-using Artefact.Utilities;
 using Artefact.ScriptSettings;
+using Artefact.UI;
+using Artefact.Utilities;
 
-namespace Artefact
+namespace Artefact.GameStates
 {
     class Game
     { 
@@ -30,8 +30,7 @@ Use the Arrow keys & Enter key to navigate the menu
 
 ";
             string[] options = { "Play", "Settings", "Exit" };
-            Menu mainMenu = new Menu(prompt, options);
-            int selectedIndex = mainMenu.Run();
+            int selectedIndex = Menu.Run(prompt, options);
 
             switch (selectedIndex)
             {

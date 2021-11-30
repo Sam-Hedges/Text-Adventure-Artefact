@@ -1,31 +1,24 @@
-﻿using Artefact.Utilities;
-using System;
+﻿using System;
+using Artefact.Utilities;
 
-namespace Artefact
+namespace Artefact.UI
 {
-    class Menu
+    public static class Menu
     {
-        private int SelectedIndex;
-        private string[] Options;
-        private string Prompt;
+        private static int _selectedIndex;
+        private static string[] _options;
+        private static string _prompt;
 
-        public Menu(string prompt, string[] options)
+        private static void DisplayOptions(bool centerOption)
         {
-            Prompt = prompt;
-            Options = options;
-            SelectedIndex = 0;
-        }
+            Utils.WriteLineAdvanced(_prompt, true, false);
 
-        private void DisplayOptions()
-        {
-            Utils.WriteLineAdvanced(Prompt, true, false);
-
-            for (int i = 0; i < Options.Length; i++)
+            for (int i = 0; i < _options.Length; i++)
             {
-                string currentOption = Options[i];
-                string[] prefix = new string[] { " ", " " };
+                string currentOption = _options[i];
+                string[] prefix = { " ", " " };
 
-                if (i == SelectedIndex)
+                if (i == _selectedIndex)
                 {
                     prefix[0] = "---|>";
                     prefix[1] = "<|---";
@@ -40,17 +33,21 @@ namespace Artefact
                     //BackgroundColor = ConsoleColor.Black;
                 }
 
-                Utils.WriteLineAdvanced($"{prefix[0]} << {currentOption} >> {prefix[1]}", true, false);
+                Utils.WriteLineAdvanced($"{prefix[0]} << {currentOption} >> {prefix[1]}", centerOption, false);
             }
             Console.ResetColor();
         }
-        public int Run()
+        public static int Run(string prompt, string[] options, bool centerOption = true)
         {
+            _prompt = prompt;
+            _options = options;
+            _selectedIndex = 0;
+            
             ConsoleKey keyPressed;
             do
             {
                 Console.Clear();
-                DisplayOptions();
+                DisplayOptions(centerOption);
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 keyPressed = keyInfo.Key;
@@ -58,24 +55,24 @@ namespace Artefact
                 //Update SelectedIndex based on arrow keys
                 if (keyPressed == ConsoleKey.UpArrow)
                 {
-                    SelectedIndex--;
-                    if (SelectedIndex == -1)
+                    _selectedIndex--;
+                    if (_selectedIndex == -1)
                     {
-                        SelectedIndex = Options.Length - 1;
+                        _selectedIndex = _options.Length - 1;
                     }
                 }
                 else if (keyPressed == ConsoleKey.DownArrow)
                 {
-                    SelectedIndex++;
-                    if (SelectedIndex == Options.Length)
+                    _selectedIndex++;
+                    if (_selectedIndex == _options.Length)
                     {
-                        SelectedIndex = 0;
+                        _selectedIndex = 0;
                     }
                 }
 
             } while (keyPressed != ConsoleKey.Enter);
 
-            return SelectedIndex;
+            return _selectedIndex;
         }
     }
 }
