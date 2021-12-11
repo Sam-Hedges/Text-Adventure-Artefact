@@ -69,7 +69,7 @@ Use the Arrow keys & Enter key to navigate the menu
         {         
 
             Console.Clear();
-            StringFormatter.Test(Scripts.Story);
+            //StringFormatter.Test(Scripts.Story);
             
 
             Console.ReadLine();

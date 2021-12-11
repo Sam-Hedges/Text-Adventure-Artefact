@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Artefact.Utilities;
 using Artefact.InventorySystem.ItemClasses;
 
@@ -8,11 +9,18 @@ namespace Artefact.InventorySystem
 {
     public class Inventory
     {
-        private const int MaxInvSlots = 15;
+        public Inventory() {}
+        public Inventory(int maxInvSlots = 10, float balance = 0)
+        {
+            _maxInvSlots = maxInvSlots;
+            _balance = balance;
+        }
+        
+        private int _maxInvSlots;
 
         public float _balance;
-        
-        private readonly List<Item> _record = new List<Item>();
+
+        public List<Item> _record = new List<Item>();
             
         public void AddItem(Item item, int iQuantityToAdd)
         {
@@ -36,7 +44,7 @@ namespace Artefact.InventorySystem
                 else
                 {
 
-                    if (_record.Count < MaxInvSlots)
+                    if (_record.Count < _maxInvSlots)
                     {
                         Item tempItem;
                         
@@ -74,7 +82,7 @@ namespace Artefact.InventorySystem
                         //
                         //
                         //***************************************
-                        Utils.WriteLineAdvanced($"\n{_record.Count} < {MaxInvSlots}");
+                        Utils.WriteLineAdvanced($"\n{_record.Count} < {_maxInvSlots}");
                         foreach (Item items in _record)
                         {
                             Utils.WriteLineAdvanced($"\n{items.Name}");
