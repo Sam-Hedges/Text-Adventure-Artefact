@@ -9,11 +9,11 @@ namespace Artefact.ScriptSettings
     {
 
         const string REGEX_PATTERN = @"(\[[^\W*]*\])([^\[]*[\]]*)(\[[^\W*]*\])?";
-        static readonly char[] SQR_BR = new char[] { '[', ']' };
+        static readonly char[] SQR_BR = { '[', ']' };
 
-        public static void Test(Scripts script)
+        public static void ColourText(string text)
         {
-            using (StringReader reader = new StringReader(File.ReadAllText(Directories.ReturnDir(script))))
+            using (StringReader reader = new StringReader(text))
             {
                 string line = string.Empty;
 

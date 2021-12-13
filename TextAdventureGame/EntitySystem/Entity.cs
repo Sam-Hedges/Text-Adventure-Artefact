@@ -7,10 +7,9 @@ namespace Artefact.EntitySystem
     [DataContract]
     public class Entity
     {
-        public Entity()
-        {
-            
-        }
+        #region Constructors
+
+        public Entity() { } // Empty constructor for XML DataContract Serialization 
         
         public Entity(string name, Level lvl, Inventory inv, Health hp, Equipment eq) // For Loading known entities; e.g saved player, preset enemies
         {
@@ -30,6 +29,11 @@ namespace Artefact.EntitySystem
             EQ = new Equipment(INV, startingArmour, startingWeapon);
         }
         
+
+        #endregion
+        
+        #region Properties
+
         [DataMember]
         public string Name { get; private set; }
         
@@ -45,5 +49,6 @@ namespace Artefact.EntitySystem
         [DataMember]
         public Equipment EQ { get; private set; }
         
+        #endregion
     }
 }

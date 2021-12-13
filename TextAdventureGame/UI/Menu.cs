@@ -16,24 +16,17 @@ namespace Artefact.UI
             for (int i = 0; i < _options.Length; i++)
             {
                 string currentOption = _options[i];
-                string[] prefix = { " ", " " };
 
                 if (i == _selectedIndex)
                 {
-                    prefix[0] = "---|>";
-                    prefix[1] = "<|---";
                     Console.ForegroundColor = ConsoleColor.Green;
-                    //BackgroundColor = ConsoleColor.White;
                 }
                 else
                 {
-                    prefix[0] = " ";
-                    prefix[1] = " ";
                     Console.ForegroundColor = ConsoleColor.White;
-                    //BackgroundColor = ConsoleColor.Black;
                 }
 
-                Utils.WriteLineAdvanced($"{prefix[0]} << {currentOption} >> {prefix[1]}", centerOption, false);
+                Utils.WriteLineAdvanced($"{currentOption}", centerOption, false);
             }
             Console.ResetColor();
         }

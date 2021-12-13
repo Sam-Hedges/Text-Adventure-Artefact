@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using Artefact.Utilities;
 using Artefact.InventorySystem.ItemClasses;
 
 namespace Artefact.InventorySystem
 {
+    [DataContract]
     public class Inventory
     {
         public Inventory() {}
@@ -16,10 +18,13 @@ namespace Artefact.InventorySystem
             _balance = balance;
         }
         
+        [DataMember]
         private int _maxInvSlots;
-
+        
+        [DataMember]
         public float _balance;
-
+        
+        [DataMember]
         public List<Item> _record = new List<Item>();
             
         public void AddItem(Item item, int iQuantityToAdd)
@@ -61,9 +66,6 @@ namespace Artefact.InventorySystem
                                 break;
                             case ItemType.Powerup:
                                 tempItem = new Powerup((Powerup)item);
-                                break;
-                            case ItemType.Crafting:
-                                tempItem = new Crafting((Crafting)item);
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();

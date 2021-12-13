@@ -13,47 +13,50 @@ using Artefact.InventorySystem;
 using Artefact.SaveSystem;
 using Artefact.ScriptSettings;
 using Artefact.ShopSystem;
+using Artefact.UI;
 
 namespace Artefact.SaveSystem
 {
-    public enum GameSave
-    {
-        Slot1,
-        Slot2,
-        Slot3
-    }
-    
     public static class Save
     {
-        private static string saveSlot1;
-        private static string saveSlot2;
-        private static string saveSlot3;
-        
-        public static void SaveD(GameSave slot)
+        public static void SaveGame()
         {
-            string saveSlot = string.Empty;
+
+            int index = Menu.Run("Please choose a Save Game Slot:\n", new string[] {"Slot 1", "Slot 2", "Slot 3"});
             
-            switch (slot)
+            switch (index)
             {
-                case GameSave.Slot1:
-                    saveSlot = saveSlot1;
+                case 0:
+                    SaveData(GameManager.Player, "slot1.xml");
                     break;
-                case GameSave.Slot2:
-                    saveSlot = saveSlot2;
+                case 1:
+                    SaveData(GameManager.Player, "slot2.xml");
                     break;
-                case GameSave.Slot3:
-                    saveSlot = saveSlot3;
+                case 2:
+                    SaveData(GameManager.Player, "slot3.xml");
                     break;
             }
-
-            if (string.IsNullOrEmpty(saveSlot))
-            {
-                
-            }
-
         }
         
-        public static void SaveData<T>(T serializableObject, string filepath)
+        public static Entity LoadGame()
+        {
+
+            int index = Menu.Run("Please choose a Save Game Slot:\n", new[] {"Slot 1", "Slot 2", "Slot 3"});
+            
+            switch (index)
+            {
+                case 0:
+                    return LoadData<Entity>("slot1.xml");
+                case 1:
+                    return LoadData<Entity>("slot2.xml");
+                case 2:
+                    return LoadData<Entity>("slot3.xml");
+                default:
+                    return null;
+            }
+        }
+        
+        private static void SaveData<T>(T serializableObject, string filepath) // Generic type input to capture any class I need to save 
         {
             // In this case I'm using var to minimize copied code and to improve readability
             var serializer = new DataContractSerializer(typeof(T));
@@ -68,10 +71,10 @@ namespace Artefact.SaveSystem
         }
 
 
-        public static T LoadData<T>(string filepath) 
+        private static T LoadData<T>(string filepath) // Generic type output to return any class I load 
         {
             // In this case I'm using var to minimize copied code and to improve readability
-            var fileStream = new FileStream(filepath, FileMode.Open);
+            var fileStream = new FileStream(filepath, FileMode.Open); 
             var reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas());
             var serializer = new DataContractSerializer(typeof(T));
             T serializableObject = (T)serializer.ReadObject(reader, true);

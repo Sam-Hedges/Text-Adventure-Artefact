@@ -21,10 +21,12 @@
     <Content Include="Scripts\Story.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Remove="SaveSystem\Saves\slot1.xml" />
+    <None Remove="SaveSystem\Saves\slot2.xml" />
+    <None Remove="SaveSystem\Saves\slot3.xml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SaveSystem\Saves" />
     <Folder Include="ShopSystem" />
   </ItemGroup>
 

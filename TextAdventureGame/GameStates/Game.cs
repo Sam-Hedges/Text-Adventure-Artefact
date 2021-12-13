@@ -1,11 +1,10 @@
 ﻿using System;
-using Artefact.ScriptSettings;
 using Artefact.UI;
 using Artefact.Utilities;
 
 namespace Artefact.GameStates
 {
-    class Game
+    public class Game
     { 
         public void Start()
         {
@@ -14,6 +13,8 @@ namespace Artefact.GameStates
 
         private void RunMainMenu()
         {
+            #region MainMenuAscii
+
             string prompt = @"
                                                                                                                                                                               !    
     ███        ▄████████ ▀████    ▐████▀     ███             ▄████████ ████████▄   ▄█    █▄     ▄████████ ███▄▄▄▄       ███     ███    █▄     ▄████████    ▄████████         .-.   
@@ -29,6 +30,8 @@ namespace Artefact.GameStates
 Use the Arrow keys & Enter key to navigate the menu
 
 ";
+
+            #endregion
             string[] options = { "Play", "Settings", "Exit" };
             int selectedIndex = Menu.Run(prompt, options);
 
@@ -66,12 +69,10 @@ Use the Arrow keys & Enter key to navigate the menu
         }
 
         private void PlayGame()
-        {         
-
+        {
             Console.Clear();
-            //StringFormatter.Test(Scripts.Story);
-            
-
+            GameManager.InitializePlayer();
+            Console.Clear();
             Console.ReadLine();
             RunMainMenu();
         }

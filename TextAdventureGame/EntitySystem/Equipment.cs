@@ -1,38 +1,53 @@
-﻿using Artefact.InventorySystem;
+﻿using System.Runtime.Serialization;
+using Artefact.InventorySystem;
 using Artefact.InventorySystem.ItemClasses;
 
 namespace Artefact.EntitySystem
 {
+    [DataContract]
     public class Equipment
     {
+        #region Constructors
+
         public Equipment() {}
         public Equipment(Inventory entityInventory, Armour armour, Weapon weapon)
         {
-            this.entityInventory = entityInventory;
+            _entityInventory = entityInventory;
             Armour = armour;
             Weapon = weapon;
         }
+        
+        #endregion
 
-        private Inventory entityInventory;
+        #region Properties
+
+        [DataMember]
+        private Inventory _entityInventory;
+        
+        [DataMember]
         public Armour Armour { get; private set; }
+        
+        [DataMember]
         public Weapon Weapon{ get; private set; }
+
+        #endregion
+
+        #region Methods
 
         public void ChangeWeapon(Weapon weapon)
         {
-            entityInventory.AddItem(Weapon, 1);
-
-            Weapon = weapon;
+            _entityInventory.AddItem(new Weapon(weapon), 1);
             
-            entityInventory.RemoveItem(weapon, 1);
+            _entityInventory.RemoveItem(weapon, 1);
         }
         
         public void ChangeArmour(Armour armour)
         {
-            entityInventory.AddItem(Weapon, 1);
+            _entityInventory.AddItem(new Armour(armour), 1);
 
-            Armour = armour;
-            
-            entityInventory.RemoveItem(armour, 1);
+            _entityInventory.RemoveItem(armour, 1);
         }
+
+        #endregion
     }
 }

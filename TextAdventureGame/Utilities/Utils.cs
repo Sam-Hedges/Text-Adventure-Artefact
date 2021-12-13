@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Artefact.Utilities
 {
-    static class Utils
+    public static class Utils
     {
         public static void WriteLineAdvanced(string text, bool centered = true, bool printAnim = true)
         {
