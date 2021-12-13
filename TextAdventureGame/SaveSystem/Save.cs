@@ -46,14 +46,19 @@ namespace Artefact.SaveSystem
             switch (index)
             {
                 case 0:
+                    if (LoadData<Entity>("slot1.xml") == null) { break; }
                     return LoadData<Entity>("slot1.xml");
                 case 1:
+                    if (LoadData<Entity>("slot2.xml") == null) { break; }
                     return LoadData<Entity>("slot2.xml");
                 case 2:
+                    if (LoadData<Entity>("slot3.xml") == null) { break; }
                     return LoadData<Entity>("slot3.xml");
                 default:
                     return null;
             }
+
+            return new Entity();
         }
         
         private static void SaveData<T>(T serializableObject, string filepath) // Generic type input to capture any class I need to save 
@@ -73,6 +78,12 @@ namespace Artefact.SaveSystem
 
         private static T LoadData<T>(string filepath) // Generic type output to return any class I load 
         {
+            if (!File.Exists(filepath))
+            {
+                T obj = default;
+                return obj;
+            }
+            
             // In this case I'm using var to minimize copied code and to improve readability
             var fileStream = new FileStream(filepath, FileMode.Open); 
             var reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas());

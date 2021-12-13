@@ -12,15 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Scripts\Fights.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Options.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Story.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="SaveSystem\Saves\slot1.xml" />
     <None Remove="SaveSystem\Saves\slot2.xml" />
     <None Remove="SaveSystem\Saves\slot3.xml" />

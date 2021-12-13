@@ -15,7 +15,7 @@ namespace Artefact.ShopSystem
         private static string shopPromt = "SHOP";
         private static List<Item> sellableItems = new List<Item>
         {
-            // FILL LIST
+            // FILL LIST <----------------------------------------------------------------------------------------------
         };
         private static Inventory _stock = new Inventory();
         public static Inventory playerBasket = new Inventory();

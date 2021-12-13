@@ -70,7 +70,8 @@ namespace Artefact.ScriptSettings
             bool viableColour = Enum.TryParse(containerColour, true, out ConsoleColor parsedEnumVal);
 
             if (viableColour) { return parsedEnumVal; }
-            else { return ConsoleColor.White; }
+
+            return ConsoleColor.White; // Defaults to white in colour can't be parsed
         }
     }
 }

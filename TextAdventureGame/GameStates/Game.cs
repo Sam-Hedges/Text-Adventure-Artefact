@@ -1,4 +1,8 @@
 ﻿using System;
+using Artefact.EntitySystem;
+using Artefact.SaveSystem;
+using Artefact.Scripts;
+using Artefact.ScriptSettings;
 using Artefact.UI;
 using Artefact.Utilities;
 
@@ -32,7 +36,7 @@ Use the Arrow keys & Enter key to navigate the menu
 ";
 
             #endregion
-            string[] options = { "Play", "Settings", "Exit" };
+            string[] options = { "Play", "Load Game", "Exit" };
             int selectedIndex = Menu.Run(prompt, options);
 
             switch (selectedIndex)
@@ -63,7 +67,10 @@ Use the Arrow keys & Enter key to navigate the menu
         private void DisplayAboutInfo()
         {
             Console.Clear();
-            Utils.WriteLineAdvanced("\nAbout the game\nPress enter to return to the Main Menu");
+            GameManager.Player = Save.LoadGame();
+            Console.Clear();
+            Utils.WriteLineAdvanced(GameManager.Player == null ? "Save File Empty" : "Save Loaded");
+
             Console.ReadKey(true);
             RunMainMenu();
         }
@@ -72,6 +79,7 @@ Use the Arrow keys & Enter key to navigate the menu
         {
             Console.Clear();
             GameManager.InitializePlayer();
+            Story.StoryProgress();
             Console.Clear();
             Console.ReadLine();
             RunMainMenu();

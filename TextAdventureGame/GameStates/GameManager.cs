@@ -46,8 +46,12 @@ namespace Artefact.GameStates
                 }
             
                 Player = new Entity(name, 100, weapon, startArmour);
-                
-                if (Menu.Run($"Are you happy with your choices?\nName: {Player.Name}\n{ReturnWeaponString(Player.EQ.Weapon)}", new[] {"Yes", "No"}) == 0) { break; }
+
+                if (Menu.Run($"Are you happy with your choices?\nName: {Player.Name}\n{ReturnWeaponString(Player.EQ.Weapon)}", new[] {"Yes", "No"}) == 0)
+                {
+                    Console.Clear();
+                    break;
+                }
             }
         }
 
